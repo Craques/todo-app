@@ -9,17 +9,19 @@ class TodoInput extends Component{
 		super(props)
 
 		this.state = {
-			text: ""
+			text: "",
+			id: 0
 		}
 	}
 
 	submitTodo = ()=>{
 		const {dispatch} = this.props;
-		const {text} = this.state;
+		let {text, id} = this.state;
+		const nextId = ++id
 		if(text.trim() != ""){
-			dispatch(addTodo(text))
+			dispatch(addTodo(text, id))
 			//Clear the textInput
-			this.setState({text: ""})
+			this.setState({text: "", id: nextId})
 		}
 	}
 

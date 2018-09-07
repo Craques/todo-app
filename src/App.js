@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Components/header';
 import TodoInput from './Components/input';
+import TodoList from './Components/todoList';
 import {Grid} from '@material-ui/core';
 import {Add} from '@material-ui/icons';
 
@@ -23,7 +24,7 @@ class App extends Component {
             lg={4}
           >
             <TodoInput/>
-
+            <TodoList/>
           </Grid>
         </Grid>
       </div>

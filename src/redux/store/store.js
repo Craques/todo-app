@@ -4,6 +4,9 @@ import thunk from 'redux-thunk';
 const todoReducer = (state={todos: []}, action)=>{
 	switch(action.type){
 		case 'ADD_TODO':
+			const {todo} = action;
+			let todos = state.todos;
+			todos = [...todos, todo]
 			return {...state, todos: [...state.todos, action.todo]}
 		default:
 			return state

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Components/header';
-import {Grid, Input, Button, IconButton, InputAdornment} from '@material-ui/core';
+import TodoInput from './Components/input';
+import {Grid} from '@material-ui/core';
 import {Add} from '@material-ui/icons';
 
 
@@ -16,21 +17,13 @@ class App extends Component {
           justify={'center'}
         >
           <Grid 
-            item xs={4}
-            direction={'column'}
+            item 
+            xs={10}
+            md={6}
+            lg={4}
           >
-            <Grid>
-              <Input
-                placeholder={'Enter the task here'}
-                fullWidth = {true}
-                endAdornment={
-                  <IconButton>
-                    <Add/>
-                  </IconButton>
-                }
-              />
-              
-            </Grid>
+            <TodoInput/>
+
           </Grid>
         </Grid>
       </div>

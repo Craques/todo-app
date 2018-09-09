@@ -12,8 +12,6 @@ const theme = createMuiTheme({
 	}
 })
 
-console.log(theme)
-
 class Header extends Component{
 
 	render(){

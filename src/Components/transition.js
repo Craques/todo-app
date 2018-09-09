@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TransitionMotion, spring} from 'react-motion';
+import {TransitionMotion, spring, presets} from 'react-motion';
 
 export default function Transition (props) {
     let defaultStyles = [], styles = [];
@@ -7,32 +7,32 @@ export default function Transition (props) {
     const config = { stiffness: 140, damping: 14 };
 
     React.Children.map(children, (child)=>{
-
+        console.log(child)
         if(child){
             defaultStyles.push({
                 key: child.key,
                 data: child,
-                style: {opacity: 0, scale: 0}
+                style: {height: 0, opacity: spring(1)}
             });
 
             styles.push({
                 key: child.key,
                 data: child,
-                style: {opacity: spring(1), scale: spring(1, config)}
+                style: {height: spring(72, presets.gentle), opacity: spring(1, presets.gentle)}
             })
         }
     });
 
     function willEnter() {
-        return {opacity: 0, scale: 0}
+        return {height: 0, opacity: 1}
     }
 
     function willLeave() {
-        return {opacity: spring(0, {stiffness: 90, damping: 11 })}
+        return {height: spring(0), opacity: 0}
     }
 
     return(
-        <TransitionMotion styles={styles} defaultStyles={defaultStyles} children={props.children}>
+        <TransitionMotion styles={styles} willLeave={willLeave} defaultStyles={defaultStyles} children={props.children}>
             {
                 (styles)=>{
                     return(
@@ -41,7 +41,7 @@ export default function Transition (props) {
                                 styles.map((child)=>{
                                     if(child){
                                         let {key, data, style} = child;
-                                        style = {...style, transform: `scale(${style.scale})` }
+                                        style = style
                                         return React.cloneElement(
                                             data,
                                             {key, style}

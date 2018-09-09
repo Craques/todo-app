@@ -18,7 +18,7 @@ class TodoInput extends Component{
 		const {dispatch} = this.props;
 		let {text, id} = this.state;
 		const nextId = ++id
-		if(text.trim() != ""){
+		if(text.trim() !== ""){
 			dispatch(addTodo(text, id))
 			//Clear the textInput
 			this.setState({text: "", id: nextId})
@@ -31,6 +31,7 @@ class TodoInput extends Component{
             	ref="todoInput"
             	value={this.state.text}
                 placeholder={'Enter the task here'}
+                style={{paddingLeft: 10, paddingRight: 15}}
                 fullWidth = {true}
                 endAdornment={
                   	<IconButton

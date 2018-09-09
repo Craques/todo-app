@@ -23,6 +23,8 @@ const todoReducer = (state=[], action)=>{
 				if(todo.id !== id){
 					return todo
 				}
+
+				return null
 			})
 
 			return updatedState
@@ -31,8 +33,44 @@ const todoReducer = (state=[], action)=>{
 	}
 }
 
+const visibilityReducer = (state=[], action)=>{
+	const {todos, type} = action;
+	
+	switch(type){
+		case 'SHOW_ALL':
+			console.log(todos)
+			return todos;
+		case 'SHOW_COMPLETED':
+			return todos.filter((todo)=>{
+				return todo.completed === true
+			})
+		case 'SHOW_ACTIVE':
+			console.log('I am working')
+			return todos.filter((todo)=>{
+				return todo.completed === false
+			})
+		default:
+			return state
+	}
+}
+
+
+const visibilityFilterReducer = (state='SHOW_ACTIVE', action)=>{
+
+
+	switch(action.type){
+		case 'SET_VISIBILITY_VALUE':
+			return action.value
+		default:
+			return state
+	}
+}
+
+
 const rootReducer = combineReducers({
-	todos: todoReducer
+	todos: todoReducer,
+	visibleTodos: visibilityReducer,
+	filter: visibilityFilterReducer
 })
 
 const enhancer = compose(

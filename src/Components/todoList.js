@@ -7,6 +7,19 @@ import {toggleTodo, deleteTodo} from './../redux/actions/todos.actions.js';
 import {Close} from '@material-ui/icons';
 
 class TodoList extends Component{
+	componentDidUpdate(prevProps){
+
+		const {dispatch, todos, filter} = this.props
+
+		todos === prevProps.todos
+		? console.log(true)
+		:dispatch({type: filter, todos})
+
+		filter === prevProps.filter
+		? console.log(true)
+		:dispatch({type: filter, todos})
+
+	}
 
 	handleChange = (id)=>{
 		const {dispatch} = this.props;
@@ -19,28 +32,24 @@ class TodoList extends Component{
 	}
 	
 	renderTodos = ()=>{
-		let {todos} = this.props
-
-		return todos.map((todo, i)=>{
-			//render todos that are not yet completed
-			if(!todo.completed){
-				return(
-					<div key = {i}>
-						<ListItem>
-							<Checkbox onChange={()=>this.handleChange(todo.id)}/>
-							<ListItemText primary={todo.task}/>
-							<ListItemSecondaryAction>
-								<IconButton 
-									onClick={()=>this.pressDelete(todo.id)}
-								>
-									<Close/>
-								</IconButton>
-							</ListItemSecondaryAction>
-						</ListItem>
-						<Divider/>	
-					</div>
-				)
-			}
+		let {todos, isCompleted, visibleTodos, dispatch} = this.props;
+		return visibleTodos.map((todo, i)=>{	
+			return(
+				<div key={i}>
+					<ListItem>
+						<Checkbox onChange={()=>this.handleChange(todo.id)} checked={todo.completed}/>
+						<ListItemText primary={todo.task}/>
+						<ListItemSecondaryAction>
+							<IconButton 
+								onClick={()=>this.pressDelete(todo.id)}
+							>
+								<Close/>
+							</IconButton>
+						</ListItemSecondaryAction>
+					</ListItem>
+					{i + 1 !== visibleTodos.length ? <Divider/> : null}	
+				</div>
+			)
 		})
 	}
 
@@ -54,8 +63,8 @@ class TodoList extends Component{
 }
 
 function mapStateToProps(state){
-	const {todos} = state;
-	return {todos}
+	const {todos, visibleTodos, filter} = state;
+	return {todos, visibleTodos, filter}
 }
 
 export default connect(mapStateToProps)(TodoList)

@@ -15,9 +15,6 @@ const theme = createMuiTheme({
 console.log(theme)
 
 class Header extends Component{
-	constructor(props){
-		super(props)
-	}
 
 	render(){
 		return(

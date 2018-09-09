@@ -3,11 +3,13 @@ import './App.css';
 import Header from './Components/header';
 import TodoInput from './Components/input';
 import TodoList from './Components/todoList';
+import AppTabBar from './Components/tabBar';
 import {Grid} from '@material-ui/core';
-import {Add} from '@material-ui/icons';
+import {connect} from 'react-redux'
 
 
 class App extends Component {
+  
   render() {
     return (
       <div className="App">
@@ -22,14 +24,23 @@ class App extends Component {
             xs={10}
             md={6}
             lg={4}
+            style={{overflow: 'hidden'}}
           >
             <TodoInput/>
-            <TodoList/>
+            <div style={{borderWidth: 1, borderColor: 'rgba(0,0,0, 0.12)', paddingTop: 0, paddingBottom: 0, borderStyle: 'solid'}}>
+              <TodoList/>
+              <AppTabBar/>
+            </div>
           </Grid>
         </Grid>
       </div>
     );
   }
+}
+
+function mapStateToProps(state){
+  const {filter, todos} = state;
+  return {filter, todos}
 }
 
 export default App;

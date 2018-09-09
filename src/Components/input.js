@@ -4,12 +4,12 @@ import {Input, Button} from '@material-ui/core';
 import {Add} from '@material-ui/icons';
 import {addTodo} from './../redux/actions/todos.actions.js'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {orange} from '@material-ui/core/colors';
+import {blueGrey} from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: orange[900]
+			main: blueGrey[800]
 		},
 	},
 	overrides: {

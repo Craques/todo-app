@@ -6,7 +6,9 @@ from '@material-ui/core';
 import {toggleTodo, deleteTodo} from './../redux/actions/todos.actions.js';
 import {Close} from '@material-ui/icons';
 import {green} from '@material-ui/core/colors';
-import{MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+import{MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import {StaggeredMotion, spring} from 'react-motion';
+import Transition from './transition';
 
 const theme = createMuiTheme({
 	palette: {
@@ -16,6 +18,30 @@ const theme = createMuiTheme({
 	}
 })
 
+class MyListItem extends Component{
+	render(){
+		const {todo, index, visibleTodos, onCheck, onDelete} = this.props
+
+		return(
+			<Transition>
+				<div key={todo.id} >
+					<ListItem>
+						<Checkbox color='primary' onChange={()=>onCheck(todo.id)} checked={todo.completed}/>
+						<ListItemText primary={todo.task}/>
+						<ListItemSecondaryAction>
+							<IconButton 
+								onClick={()=>onDelete(todo.id)}
+							>
+								<Close/>
+							</IconButton>
+						</ListItemSecondaryAction>
+					</ListItem>
+					{index + 1 !== visibleTodos.length ? <Divider/> : null}	
+				</div>
+			</Transition>
+		)
+	}
+} 
 
 class TodoList extends Component{
 	componentDidUpdate(prevProps){
@@ -44,33 +70,29 @@ class TodoList extends Component{
 	
 	renderTodos = ()=>{
 		let {todos, isCompleted, visibleTodos, dispatch} = this.props;
-		return visibleTodos.map((todo, i)=>{	
+		const defaultStyles = visibleTodos.map(()=>({h: 0}))
+
+		return visibleTodos.map((todo, index)=>{	
 			return(
-				<MuiThemeProvider theme={theme}>
-					<div key={i}>
-						<ListItem>
-							<Checkbox color="primary" onChange={()=>this.handleChange(todo.id)} checked={todo.completed}/>
-							<ListItemText primary={todo.task}/>
-							<ListItemSecondaryAction>
-								<IconButton 
-									onClick={()=>this.pressDelete(todo.id)}
-								>
-									<Close/>
-								</IconButton>
-							</ListItemSecondaryAction>
-						</ListItem>
-						{i + 1 !== visibleTodos.length ? <Divider/> : null}	
-					</div>
-				</MuiThemeProvider>
+				<MyListItem 
+					todo={todo} 
+					index={index} 
+					visibleTodos={visibleTodos}
+					onCheck={this.handleChange}
+					onDelete={this.pressDelete}
+					style ={{height: this.props.height}}
+				/>
 			)
 		})
 	}
 
 	render(){
 		return(
-			<List>
-				{this.renderTodos()}
-			</List>
+			<MuiThemeProvider theme={theme}>
+				<List>
+					{this.renderTodos()}
+				</List>
+			</MuiThemeProvider>
 		)
 	}
 }

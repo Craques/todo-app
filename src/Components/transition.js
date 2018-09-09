@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {TransitionMotion, spring, presets} from 'react-motion';
 
 export default function Transition (props) {
     let defaultStyles = [], styles = [];
     const {children} = props;
-    const config = { stiffness: 140, damping: 14 };
 
     React.Children.map(children, (child)=>{
-        console.log(child)
         if(child){
             defaultStyles.push({
                 key: child.key,
                 data: child,
-                style: {height: 0, opacity: spring(1)}
+                style: {height: 0, opacity: spring(1, presets.gentle)}
             });
 
             styles.push({
@@ -28,7 +26,7 @@ export default function Transition (props) {
     }
 
     function willLeave() {
-        return {height: spring(0), opacity: 0}
+        return {height: spring(0, presets.gentle), opacity: 0}
     }
 
     return(

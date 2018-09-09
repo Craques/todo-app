@@ -37,9 +37,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state){
-  const {filter, todos} = state;
-  return {filter, todos}
-}
 
 export default App;

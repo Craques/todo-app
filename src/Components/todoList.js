@@ -7,7 +7,6 @@ import {toggleTodo, deleteTodo} from './../redux/actions/todos.actions.js';
 import {Close} from '@material-ui/icons';
 import {green} from '@material-ui/core/colors';
 import{MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import {StaggeredMotion, spring} from 'react-motion';
 import Transition from './transition';
 
 const theme = createMuiTheme({
@@ -69,8 +68,7 @@ class TodoList extends Component{
 	}
 	
 	renderTodos = ()=>{
-		let {todos, isCompleted, visibleTodos, dispatch} = this.props;
-		const defaultStyles = visibleTodos.map(()=>({h: 0}))
+		let {visibleTodos} = this.props;
 
 		return visibleTodos.map((todo, index)=>{	
 			return(

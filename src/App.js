@@ -5,7 +5,6 @@ import TodoInput from './Components/input';
 import TodoList from './Components/todoList';
 import AppTabBar from './Components/tabBar';
 import {Grid} from '@material-ui/core';
-import {connect} from 'react-redux'
 
 
 class App extends Component {

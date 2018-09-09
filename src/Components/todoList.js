@@ -5,6 +5,17 @@ import {List, ListItem, ListItemText, Checkbox, Divider,
 from '@material-ui/core';
 import {toggleTodo, deleteTodo} from './../redux/actions/todos.actions.js';
 import {Close} from '@material-ui/icons';
+import {green} from '@material-ui/core/colors';
+import{MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: green[500]
+		}
+	}
+})
+
 
 class TodoList extends Component{
 	componentDidUpdate(prevProps){
@@ -12,11 +23,11 @@ class TodoList extends Component{
 		const {dispatch, todos, filter} = this.props
 
 		todos === prevProps.todos
-		? console.log(true)
+		? null
 		:dispatch({type: filter, todos})
 
 		filter === prevProps.filter
-		? console.log(true)
+		? null
 		:dispatch({type: filter, todos})
 
 	}
@@ -35,20 +46,22 @@ class TodoList extends Component{
 		let {todos, isCompleted, visibleTodos, dispatch} = this.props;
 		return visibleTodos.map((todo, i)=>{	
 			return(
-				<div key={i}>
-					<ListItem>
-						<Checkbox onChange={()=>this.handleChange(todo.id)} checked={todo.completed}/>
-						<ListItemText primary={todo.task}/>
-						<ListItemSecondaryAction>
-							<IconButton 
-								onClick={()=>this.pressDelete(todo.id)}
-							>
-								<Close/>
-							</IconButton>
-						</ListItemSecondaryAction>
-					</ListItem>
-					{i + 1 !== visibleTodos.length ? <Divider/> : null}	
-				</div>
+				<MuiThemeProvider theme={theme}>
+					<div key={i}>
+						<ListItem>
+							<Checkbox color="primary" onChange={()=>this.handleChange(todo.id)} checked={todo.completed}/>
+							<ListItemText primary={todo.task}/>
+							<ListItemSecondaryAction>
+								<IconButton 
+									onClick={()=>this.pressDelete(todo.id)}
+								>
+									<Close/>
+								</IconButton>
+							</ListItemSecondaryAction>
+						</ListItem>
+						{i + 1 !== visibleTodos.length ? <Divider/> : null}	
+					</div>
+				</MuiThemeProvider>
 			)
 		})
 	}

@@ -18,3 +18,9 @@ export function deleteTodo(id){
 		id
 	})
 }
+
+export function removeAllTodos(){
+	return({
+		type: 'REMOVE_ALL_TODOS'
+	})
+}

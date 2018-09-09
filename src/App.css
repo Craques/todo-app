@@ -5,16 +5,16 @@
   overflow: hidden;
 }
 
+body{
+  overflow: hidden;
+}
+
 .MuiList-padding-222{
   padding: 0 !important
 }
 
 ul{
   padding: 0 !important
-}
-
-.MuiIconButton-root-198{
-  margin-right: 15px !important;
 }
 
 .App {

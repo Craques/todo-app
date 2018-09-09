@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Tabs, Tab, Typography, AppBar, IconButton} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {Close} from '@material-ui/icons';
+import {removeAllTodos} from './../redux/actions/todos.actions'
 
 class AppTabBar extends Component{
 
@@ -9,6 +10,12 @@ class AppTabBar extends Component{
 		const {dispatch} = this.props
 		dispatch({type: 'SET_VISIBILITY_VALUE', value})
 		//update the visible todos
+	}
+
+	clearTodos = ()=>{
+		const {dispatch} = this.props;
+		dispatch(removeAllTodos())
+
 	}
 
 	render(){
@@ -22,7 +29,8 @@ class AppTabBar extends Component{
 					<Typography style={{flex: 1}}/>
 
 					<IconButton 
-						color='secondary'
+						color='primary'
+						onClick={this.clearTodos}
 					>
 						<Close/>
 					</IconButton>

@@ -1,8 +1,31 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Input, IconButton} from '@material-ui/core';
+import {Input, Button} from '@material-ui/core';
 import {Add} from '@material-ui/icons';
 import {addTodo} from './../redux/actions/todos.actions.js'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {orange} from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: orange[900]
+		},
+	},
+	overrides: {
+    	MuiButton: {
+    		root: {
+    			marginRight: 25,
+    			marginBottom: 5
+    		}
+    	},
+    	MuiInput: {
+    		root: {
+    			paddingLeft: 20
+    		}
+    	}
+    }	
+})
 
 class TodoInput extends Component{
 	constructor(props){
@@ -27,21 +50,24 @@ class TodoInput extends Component{
 
 	render(){
 		return(
-            <Input
-            	ref="todoInput"
-            	value={this.state.text}
-                placeholder={'Enter the task here'}
-                style={{paddingLeft: 10, paddingRight: 15}}
-                fullWidth = {true}
-                endAdornment={
-                  	<IconButton
-                  		onClick={()=>{this.submitTodo()}}
-                  	>
-                    	<Add/>
-                  	</IconButton>
-                }
-                onChange = {(e)=>{this.setState({text: e.target.value})}}
-            />
+			<MuiThemeProvider theme={theme}>
+				<Input
+	            	ref="todoInput"
+	            	value={this.state.text}
+	                placeholder={'Enter the task here'}
+	                fullWidth = {true}
+	                endAdornment={
+	                  	<Button
+	                  		variant="fab"
+	                  		color="primary"
+	                  		onClick={()=>{this.submitTodo()}}
+	                  	>
+	                    	<Add/>
+	                  	</Button>
+	                }
+	                onChange = {(e)=>{this.setState({text: e.target.value})}}
+	            />
+			</MuiThemeProvider>
 		)
 	}
 }

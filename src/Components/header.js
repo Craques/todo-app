@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {AppBar, Toolbar, Typography, IconButton} from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {orange} from '@material-ui/core/colors';
+import {blueGrey} from '@material-ui/core/colors';
 import {Create} from '@material-ui/icons';
 
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: orange[900]
+			main: blueGrey[900]
 		},
 	}
 })

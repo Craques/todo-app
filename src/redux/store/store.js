@@ -20,14 +20,12 @@ const todoReducer = (state=[], action)=>{
 			return updatedState;
 		case 'DELETE_TODO':
 			updatedState = state.filter((todo)=>{
-				if(todo.id !== id){
-					return todo
-				}
-
-				return null
+				return todo.id !== id
 			})
 
 			return updatedState
+		case 'REMOVE_ALL_TODOS': 
+			return []
 		default:
 			return state
 	}
@@ -38,14 +36,12 @@ const visibilityReducer = (state=[], action)=>{
 	
 	switch(type){
 		case 'SHOW_ALL':
-			console.log(todos)
 			return todos;
 		case 'SHOW_COMPLETED':
 			return todos.filter((todo)=>{
 				return todo.completed === true
 			})
 		case 'SHOW_ACTIVE':
-			console.log('I am working')
 			return todos.filter((todo)=>{
 				return todo.completed === false
 			})

@@ -5,6 +5,14 @@
   overflow: hidden;
 }
 
+a,
+a:link,
+a:visited,
+a:active{
+  text-decoration: none;
+  color: inherit;
+}
+
 body{
   overflow: hidden;
 }

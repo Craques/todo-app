@@ -4,7 +4,7 @@ I made a todo app with help from some tutorials, it is not the best it can be im
 
 ## Live demo
 
-I made a [live demo](craques.github.io/todo-app) of the app, the code is the one in this repo
+I made a [live demo](https://craques.github.io/todo-app) of the app, the code is the one in this repo
 
 ## These are the resources I used to make it 
 

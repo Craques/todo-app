@@ -6,6 +6,8 @@ I made a todo app with help from some tutorials, it is not the best it can be im
 
 I made a [live demo](https://craques.github.io/todo-app) of the app, the code is the one in this repo
 
+![](todoAppDemo.gif)
+
 ## These are the resources I used to make it 
 
 

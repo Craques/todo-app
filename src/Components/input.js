@@ -58,6 +58,7 @@ class TodoInput extends Component{
 	                fullWidth = {true}
 	                endAdornment={
 	                  	<Button
+	                  		size="medium"
 	                  		variant="fab"
 	                  		color="primary"
 	                  		onClick={()=>{this.submitTodo()}}

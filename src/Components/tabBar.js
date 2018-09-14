@@ -66,7 +66,7 @@ class AppTabBar extends Component{
 					<Dialog
 						open={this.state.dialogVisible}
 					>
-						<DialogTitle>"Delete all todos"</DialogTitle>
+						<DialogTitle>Delete all todos</DialogTitle>
 						<DialogContent>
 							<DialogContentText>
 								If you want to remove all your todos press delete otherwise cancel.

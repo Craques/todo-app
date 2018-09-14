@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Tabs, Tab, Typography, AppBar, IconButton} from '@material-ui/core';
+import {Tabs, Tab, Typography, AppBar, IconButton, Dialog, Button, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {Close} from '@material-ui/icons';
-import {removeAllTodos} from './../redux/actions/todos.actions'
+import {removeAllTodos} from './../redux/actions/todos.actions';
 import {blueGrey} from '@material-ui/core/colors';
-import{MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+import{MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
+//Add a modal or what these guys like to call a dialog in this file
 const theme = createMuiTheme({
 	palette: {
 		primary: {
@@ -18,6 +19,13 @@ const theme = createMuiTheme({
 })
 
 class AppTabBar extends Component{
+	constructor(props){
+		super(props)
+
+		this.state = {
+			dialogVisible: false
+		}
+	}
 
 	setVisibilityFilter = (event, value)=>{
 		const {dispatch} = this.props
@@ -28,6 +36,7 @@ class AppTabBar extends Component{
 	clearTodos = ()=>{
 		const {dispatch} = this.props;
 		dispatch(removeAllTodos())
+		this.setState({dialogVisible: false})
 
 	}
 
@@ -48,11 +57,37 @@ class AppTabBar extends Component{
 
 						<IconButton 
 							color='inherit'
-							onClick={this.clearTodos}
+							onClick={()=>this.setState({dialogVisible: true})}
 						>
 							<Close/>
 						</IconButton>
 					</Tabs>
+
+					<Dialog
+						open={this.state.dialogVisible}
+					>
+						<DialogTitle>"Delete all todos"</DialogTitle>
+						<DialogContent>
+							<DialogContentText>
+								If you want to remove all your todos press delete otherwise cancel.
+								You may not be able to recover your todos
+							</DialogContentText>
+
+							<DialogActions>
+								<Button color="primary" variant="contained"
+									onClick={()=>this.clearTodos()}
+								>
+									Delete
+								</Button>
+
+								<Button color="primary" variant="outlined"
+									onClick={()=>this.setState({dialogVisible: false})}
+								>
+									Cancel
+								</Button>
+							</DialogActions>
+						</DialogContent>
+					</Dialog>
 				</AppBar>
 			</MuiThemeProvider>
 		)
